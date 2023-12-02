@@ -49,9 +49,10 @@ class PeriodCRUD:
 
     def get_current_period(self, *, db: Session) -> Period | None:
         d = date.today()
+        print(d)
         period = (
             db.query(self.model)
-            .filter(self.model.start_date <= d, self.model.end_date <= d)
+            .filter(self.model.start_date <= d, self.model.end_date >= d)
             .first()
         )
         return period

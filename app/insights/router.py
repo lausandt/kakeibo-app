@@ -33,6 +33,7 @@ async def load_fixeds_for_period(
     db: Session = Depends(get_db),
     super_user: User = Depends(get_current_active_super_user),
 ):
+    print(period.nr)
     per = period_crud.period.load_fixed_for_period(
         db=db, period=period, owner_id=int(super_user.id)
     )

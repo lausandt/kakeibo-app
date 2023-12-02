@@ -1,5 +1,3 @@
-from . import frontend
-
 from fastapi import FastAPI
 
 from app.admin.router import router as admin_router
@@ -15,11 +13,6 @@ models.Base.metadata.create_all(bind=engine)
 app = FastAPI(title="kakeibo-app", summary="A household-ledger app.")
 
 
-@app.get("/")
-def root():
-    return {"message": "The API is LIVE!!"}
-
-
 app.include_router(user_router)
 app.include_router(entry_router)
 app.include_router(insights_router)
@@ -28,9 +21,8 @@ app.include_router(admin_router)
 
 app.include_router(auth_router)
 
-frontend.init(app)
 
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run(app, host="0.0.0.0", port=8001, log_level="debug")
+    uvicorn.run(app, host="0.0.0.0", port=8001)
